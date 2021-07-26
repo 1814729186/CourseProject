@@ -32,7 +32,6 @@ public abstract class AbstractTerm implements  Comparable<AbstractTerm>, FileSer
         return this.content.hashCode();
     }
 
-
     /**
      * 构造函数
      * @param content ：Term内容

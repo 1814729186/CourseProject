@@ -1,7 +1,15 @@
 package hust.cs.javacourse.search.index.impl;
 
+import hust.cs.javacourse.search.index.AbstractDocument;
+import hust.cs.javacourse.search.index.AbstractDocumentBuilder;
 import hust.cs.javacourse.search.index.AbstractIndex;
 import hust.cs.javacourse.search.index.AbstractIndexBuilder;
+import hust.cs.javacourse.search.util.FileUtil;
+
+import java.io.File;
+import java.io.IOException;
+import java.util.Collections;
+import java.util.List;
 
 /**
  * <pre>
@@ -9,22 +17,13 @@ import hust.cs.javacourse.search.index.AbstractIndexBuilder;
  * </pre>
  */
 public class IndexBuilder extends AbstractIndexBuilder {
-//    /**
-//     * 构建索引必须解析文档构建Document对象，因此包含AbstractDocumentBuilder的子类对象
-//     */
-//    protected AbstractDocumentBuilder docBuilder;
-//
-//    /**
-//     * docId计数器，每当解析一个文档并写入索引，计数器应该+1
-//     */
-//    protected int docId = 0;
 
     /**
      * 构造器
-     * @param docBuilder
+     * @param docBuilder DocumentBuilder对象
      */
-    public IndexBuilder(DocumentBuilder docBuilder){
-        this.docBuilder = docBuilder;
+    public IndexBuilder(AbstractDocumentBuilder docBuilder){
+        super(docBuilder);
     }
 
     /**
@@ -35,6 +34,16 @@ public class IndexBuilder extends AbstractIndexBuilder {
      * @return ：构建好的索引
      * </pre>
      */
-    public AbstractIndex buildIndex(String rootDirectory){return null;}
+    public AbstractIndex buildIndex(String rootDirectory){
+        AbstractIndex index = new Index();
+        List<String> filePaths = FileUtil.list(rootDirectory);//构建文件夹索引
+        AbstractDocument document = null;
+        for (String docPath : filePaths) {
+            document = docBuilder.build(docId, docPath, new File(docPath));
+            index.addDocument(document);//将文件夹中的termtuple倒序构建索引
+            docId += 1;
+        }
+        return index;
+    }
 
 }

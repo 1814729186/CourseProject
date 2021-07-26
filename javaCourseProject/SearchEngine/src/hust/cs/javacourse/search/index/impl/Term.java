@@ -2,6 +2,7 @@ package hust.cs.javacourse.search.index.impl;
 
 import hust.cs.javacourse.search.index.AbstractTerm;
 
+import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
@@ -16,13 +17,15 @@ import java.io.ObjectOutputStream;
  */
 public class Term extends AbstractTerm {
     /**
-     * 因为要作为HashMap里面的key，因此必须要覆盖hashCode方法
-     * 返回对象的HashCode
-     * @return ：对象的HashCode
+     * 缺省构造
      */
-    @Override
-    public int hashCode() {
-        return this.content.hashCode();
+    public Term(){}
+    /**
+     * 有参构造函数
+     * @param content term
+     */
+    public Term(String content){
+        super(content);
     }
 
     /**
@@ -32,6 +35,10 @@ public class Term extends AbstractTerm {
      */
     @Override
     public boolean equals(Object obj){
+        if(this == obj) return true;
+        if(!(obj instanceof AbstractTerm)||obj==null) return false;
+        //先调用hashcode()进行对比，如果相同再进行equals的比较,提高效率
+        //if(hashCode()!=obj.hashCode()) return false;
         //调用字符串equals方法
         return this.content.equals(((Term)obj).content);
     }
@@ -41,19 +48,19 @@ public class Term extends AbstractTerm {
      * @return 字符串
      */
     @Override
-    public String toString(){return "";}
+    public String toString(){return content;}
 
     /**
      * 返回Term内容
      * @return Term内容
      */
-    public String getContent(){return null;}
+    public String getContent(){return content;}
 
     /**
      * 设置Term内容
      * @param content：Term的内容
      */
-    public void setContent(String content){}
+    public void setContent(String content){this.content = content;}
 
     /**
      * 比较二个Term大小（按字典序）
@@ -61,17 +68,34 @@ public class Term extends AbstractTerm {
      * @return ： 返回二个Term对象的字典序差值
      */
     @Override
-    public int compareTo(AbstractTerm o) {return 0;}
+    public int compareTo(AbstractTerm o) {
+        //调用String类的compareTo方法
+        return this.content.compareTo(o.getContent());
+    }
 
     /**
      * 写到二进制文件
      * @param out :输出流对象
      */
-    public void writeObject(ObjectOutputStream out){}
+    public void writeObject(ObjectOutputStream out) {
+        //序列化写入
+        try {
+            out.writeObject(this.content);
+        }catch(IOException e){
+            e.printStackTrace();
+        }
+    }
 
     /**
      * 从二进制文件读
      * @param in ：输入流对象
      */
-    public void readObject(ObjectInputStream in){}
+    public void readObject(ObjectInputStream in){
+        //序列化读入
+        try {
+            this.content = (String)in.readObject();
+        }catch(IOException|ClassNotFoundException e){
+            e.printStackTrace();
+        }
+    }
 }

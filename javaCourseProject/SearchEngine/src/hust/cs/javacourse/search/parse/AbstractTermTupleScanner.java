@@ -17,12 +17,6 @@ public abstract class AbstractTermTupleScanner extends AbstractTermTupleStream {
      */
     protected BufferedReader input = null;
 
-    /**
-     * 缺省构造函数
-     */
-    public  AbstractTermTupleScanner(){
-        super();
-    }
 
     /**
      * 构造函数

@@ -1,15 +1,18 @@
 package hust.cs.javacourse.search.query.impl;
+import hust.cs.javacourse.search.index.AbstractPosting;
+import hust.cs.javacourse.search.index.AbstractTerm;
 import hust.cs.javacourse.search.query.AbstractHit;
 import hust.cs.javacourse.search.query.Sort;
 
 import java.util.List;
+import java.util.Map;
 
 public class SimpleSorter implements Sort {
     /**
      * 对命中结果集合根据文档得分排序
      * @param hits ：命中结果集合
      */
-    public void sort(List<AbstractHit> hits){}
+    public void sort(List<AbstractHit> hits){hits.sort(AbstractHit::compareTo);}
 
     /**
      * <pre>
@@ -22,5 +25,13 @@ public class SimpleSorter implements Sort {
      * @return ：命中文档的得分
      * </pre>
      */
-    public double score(AbstractHit hit){return 0;}
+    public double score(AbstractHit hit){
+        double s = 0;
+        for (Map.Entry<AbstractTerm, AbstractPosting> entry : hit.getTermPostingMapping().entrySet()) {
+            if (entry.getValue() != null) {
+                s += entry.getValue().getFreq();
+            }
+        }
+        return s;
+    }
 }

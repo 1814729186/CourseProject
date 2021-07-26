@@ -1,0 +1,21 @@
+# 过滤器配置文档信息，用于配置过滤器使用规则，使用#符号编辑注释信息
+# 为防止不必要错误，不存在该文档或者文档格式存在问题时，将默认同时使用三种过滤器并且使用Config类中默认的信息进行停用词的设置
+# 不同参数的指定不存在先后要求，仅要求关键字信息和冒号一致
+# 文档信息在DocumentBuilder类的静态初始化代码块中完成加载
+
+# 过滤器使能控制 true/false
+LengthTermTurpleFilter:true
+PatternTermTupleFilter:true
+StopWordTermTuplrFilter:true
+
+# 基于单词长度过滤器参数设置 列出长度范围，空格隔开 或者使用default信息(键入"(default)")
+# LengthTermTurpleFilter settings: 0 3		# 长度为5 - 18
+LengthTermTurpleFilter settings: (default)	# 表示使用Config中定义的默认参数信息
+
+# 基于正则表达的过滤器参数设置
+PatternTermTupleFilter settings: (default)	# 使用默认信息，注意要用括号括起来，仅编辑default表示仅与"default"进行匹配
+# PatternTermTupleFilter settings: \d.*		# （例）匹配数字开头的
+
+# 停用词过滤器参数设置，空格键隔开相关参数
+StopWordTermTuplrFilter settings: (default)
+# StopWordTermTuplrFilter settings: 12-31,26% # 停用词测试，停用词不能换行，使用空格或者','分割

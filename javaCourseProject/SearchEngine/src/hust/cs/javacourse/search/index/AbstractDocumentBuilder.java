@@ -3,6 +3,7 @@ package hust.cs.javacourse.search.index;
 import hust.cs.javacourse.search.parse.AbstractTermTupleStream;
 
 import java.io.File;
+import java.io.IOException;
 
 /**
  * <pre>
@@ -19,9 +20,10 @@ public abstract class AbstractDocumentBuilder {
      * @param docPath           : 文档绝对路径
      * @param termTupleStream   : 文档对应的TermTupleStream
      * @return ：Document对象
+     * @throws IOException 抛出的异常
      * </pre>
      */
-    public  abstract AbstractDocument build(int docId, String docPath, AbstractTermTupleStream termTupleStream);
+    public  abstract AbstractDocument build(int docId, String docPath, AbstractTermTupleStream termTupleStream) throws IOException;
 
 //    /**
 //     * <pre>

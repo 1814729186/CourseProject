@@ -2,6 +2,12 @@ package hust.cs.javacourse.search.parse.impl;
 
 import hust.cs.javacourse.search.index.AbstractTermTuple;
 import hust.cs.javacourse.search.parse.AbstractTermTupleFilter;
+import hust.cs.javacourse.search.parse.AbstractTermTupleStream;
+import hust.cs.javacourse.search.util.Config;
+import hust.cs.javacourse.search.util.StopWords;
+
+import java.io.IOException;
+import java.util.Arrays;
 
 /**
  * <pre>
@@ -11,17 +17,21 @@ import hust.cs.javacourse.search.parse.AbstractTermTupleFilter;
  */
 public class StopWordTermTupleFilter extends AbstractTermTupleFilter {
     /**
-     * 实现父类AbstractTermTupleStream的close方法，关闭流
+     * 构造函数
+     * @param input Filter输入
      */
-    @Override
-    public void close(){
-        input.close();
-    }
-
+    public StopWordTermTupleFilter(AbstractTermTupleStream input){super(input);}
     /**
      * 获得下一个三元组
-     * @return: 下一个三元组；如果到了流的末尾，返回null
+     * @return : 下一个三元组；如果到了流的末尾，返回null
+     * @throws IOException : 抛出的IO异常
      */
-    public AbstractTermTuple next(){return null;}
+    public AbstractTermTuple next()throws IOException {
+        AbstractTermTuple termTuple = input.next();
+        if (termTuple == null) { return null; }
+        //在停用词表中，递归调用返回下一个
+        if (Arrays.asList(StopWords.STOP_WORDS).contains(termTuple.term.getContent())) { return this.next(); }
+        else return termTuple;
+    }
 
 }

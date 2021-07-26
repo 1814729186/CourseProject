@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Failed suite [All Test Suite]" guice-stage="DEVELOPMENT">
+  <test thread-count="5" name="D:/IdeaWorkspace/SeachEngine/test/hust/cs/javacourse/search/index/IndexTest.java(failed)">
+    <classes>
+      <class name="hust.cs.javacourse.search.index.IndexTest">
+        <methods>
+          <include name="testLoad" invocation-numbers="0"/>
+          <include name="testSave" invocation-numbers="0"/>
+          <include name="testTestToString"/>
+          <include name="testReadObject" invocation-numbers="0"/>
+          <include name="testAddDocument" invocation-numbers="0"/>
+          <include name="testGetDictionary"/>
+          <include name="testGetDocName" invocation-numbers="0"/>
+          <include name="testOptimize" invocation-numbers="0"/>
+          <include name="testSearch" invocation-numbers="0"/>
+          <include name="testWriteObject" invocation-numbers="0"/>
+        </methods>
+      </class> <!-- hust.cs.javacourse.search.index.IndexTest -->
+    </classes>
+  </test> <!-- D:/IdeaWorkspace/SeachEngine/test/hust/cs/javacourse/search/index/IndexTest.java(failed) -->
+  <test thread-count="5" name="D:/IdeaWorkspace/SeachEngine/test/hust/cs/javacourse/search/index/IndexBuilderTest.java(failed)">
+    <classes>
+      <class name="hust.cs.javacourse.search.index.IndexBuilderTest">
+        <methods>
+          <include name="testBuildIndex" invocation-numbers="0"/>
+        </methods>
+      </class> <!-- hust.cs.javacourse.search.index.IndexBuilderTest -->
+    </classes>
+  </test> <!-- D:/IdeaWorkspace/SeachEngine/test/hust/cs/javacourse/search/index/IndexBuilderTest.java(failed) -->
+</suite> <!-- Failed suite [All Test Suite] -->

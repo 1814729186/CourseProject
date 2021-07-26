@@ -19,11 +19,9 @@ import java.util.List;
 public class Document extends AbstractDocument {
 
     /**
-     * 缺省构造函数
+     * 缺省构造器
      */
-    public  Document(){
-        super();
-    }
+    public  Document(){ }
 
     /**
      * 构造函数
@@ -92,7 +90,7 @@ public class Document extends AbstractDocument {
     public void addTuple(AbstractTermTuple tuple){
         //查询是否已经存在三元组，不存在则添加，否则直接返回
         //List.contains会自动调用equals()方法进行比较
-        if(this.tuples.contains(tuple)) return;
+        if(tuples.contains(tuple)) return;
         this.tuples.add(tuple);
     }
 
@@ -102,17 +100,16 @@ public class Document extends AbstractDocument {
      * @return ： 如果包含指定的三元组，返回true;否则返回false
      */
     public boolean contains(AbstractTermTuple tuple){
-        return this.tuples.contains(tuple);
+        return tuples.contains(tuple);
     }
 
     /**
      * 获得指定下标位置的三元组
      * @param index：指定下标位置
-     * @return：三元组
+     * @return ：三元组
      */
     public AbstractTermTuple getTuple(int index){
-        //List方法
-        return this.tuples.get(index);
+        return tuples.get(index);
     }
 
     /**
@@ -120,7 +117,7 @@ public class Document extends AbstractDocument {
      * @return ：文档对象包含的三元组的个数
      */
     public int getTupleSize(){
-        return this.tuples.size();
+        return tuples.size();
     }
 
     /**
@@ -130,16 +127,14 @@ public class Document extends AbstractDocument {
     @Override
     public String toString(){
         //将Document类实例对象成员表示为字符串形式
-        String res = "";
-        res += "docId = "+docId;
-        res += "docPath = "+docPath;
-        res += "tuples = ";
+        StringBuilder buf = new StringBuilder();
+        buf.append("docId = "+docId);
+        buf.append(",docPath = "+docPath);
+        buf.append("tuples: \n");
         //添加三元项的表示形式，调用三元项的toString()方法,进行字符串拼接
         for(AbstractTermTuple iter:this.tuples){
-            res += iter.toString();
-            res += "\t";
+            buf.append(iter.toString()+"\t");
         }
-        return res;
+        return "{ "+buf.toString()+"}\n";
     }
-
 }

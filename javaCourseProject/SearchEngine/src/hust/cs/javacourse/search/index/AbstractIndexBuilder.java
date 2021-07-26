@@ -1,5 +1,7 @@
 package hust.cs.javacourse.search.index;
 
+import java.io.IOException;
+
 /**
  * <pre>
  * AbstractIndexBuilder是索引构造器的抽象父类
@@ -20,10 +22,7 @@ public abstract class AbstractIndexBuilder {
     public AbstractIndexBuilder(AbstractDocumentBuilder docBuilder){
         this.docBuilder = docBuilder;
     }
-    /**
-     * 默认缺省构造器
-     */
-    public AbstractIndexBuilder(){};
+
     /**
      * <pre>
      * 构建指定目录下的所有文本文件的倒排索引.
